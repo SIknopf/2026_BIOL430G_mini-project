@@ -1,98 +1,125 @@
-<<<<<<< HEAD
-© 2026 Sofia Knopf. This resource was created for academic purposes as part of a university course. 
+© 2026 Sofia Knopf. This resource was created for academic purposes as part of a university course.
 All third-party materials are used for educational use only.
 
-#Experiencing music emotions through movement
+# Experiencing Music Emotions Through Movement
 
-Code and data for our *neuroscience and musicology* paper:
+Code and data for our *neuroscience and musicology* project:
 
-**"Evaluating the motor cortex’s role in generating emotion by comparing cortical 
-inhibition using Transcranial Magnetic Stimulation (TMS) to a sham control session"**
+**"Evaluating the motor cortex’s role in generating emotion by comparing cortical inhibition using Transcranial Magnetic Stimulation (TMS) to a sham control session"**
 
-By [Sofia Knopf](University of British Columbia Okanagan), [Sarah Kraeutner](https://thenimbl.com/) 
-(University of British Columbia Okanagan), and 
-[Anja Cui](https://ucrisportal.univie.ac.at/en/persons/anja-xiaoxing-cui/) (University of Vienna) 
+**Authors:**
+Sofia Knopf (University of British Columbia Okanagan)
+Sarah Kraeutner (University of British Columbia Okanagan)
+Anja Cui (University of Vienna)
 
+---
 
-All experimental results can be reproduced using the code and data in this repository. However, no raw data has been provided as it contains sensitive human data. 
-Feel free to contact Sarah Kraeutner (corresponding author) by [sarah.kraeutner@ubc.ca] 
-if you have any questions about our work. 
+## Project Description
 
-**Abstract**
+This project investigates whether the primary motor cortex (M1) plays a causal role in emotional responses to music. Using continuous theta-burst stimulation (cTBS), participants completed both active and sham sessions. Emotional responses were measured using valence and arousal ratings.
 
-Music has the power to move us both physically and emotionally. 
-Research suggests a correlation between primary motor cortex (M1) activity and emotional production. 
-However, the causal relationship between M1 involvement and emotional processing has not yet been established using continuous theta-burst stimulation (cTBS). 
-To address this gap, the present within-subjects study will examine the effects on emotional responses to music following M1 inhibition. 
-Participants (N = 20, right-handed) will attend two laboratory sessions involving either active, or sham stimulation serving as a control. 
-cTBS will be applied to the contralateral M1 to modulate motor pathway activity. Following stimulation, participants will listen to pre-rated instrumental music clips 
-balanced for valence and arousal and will rate their emotional responses using standardized valence and arousal scales. 
-These findings may advance applications in well-being and neurorehabilitation, where music is used to enhance emotional health and restore motor function after neurological injury.
+**Research Question:**
+Does inhibiting M1 alter perceived emotional responses to music?
 
-**Directory**
+---
 
-* `data/` contains all the data used in this project. However, only processed de-identified data was incdluded as public sharing of raw data is against ethics. This subdirectory contains a data dictionary. 
-* `scripts/` contains source code for the within-participant valence and arousal ratings across active and sham TMS sessions. This contains files to generate the models and plots in the paper.
+## Repository Structure
 
-**Requirments** 
+```
+data/processed/             # Cleaned, de-identified dataset used for analysis
+manuscript/docs/            # R Markdown manuscript, rendered HTML, and PDF
+outputs/figures/            # Generated figures from analyses
+renv/                       # Project-specific R package environment
+scripts/analysis/           # Scripts used to run statistical analyses
 
-* R version 4.4.2
-* openxlsx 
+.gitignore                  # Ignored files
+2026-01-22_README           # Project documentation
+2026-04-09_data_management_plan.pdf
+2026-04-09_mock_pre-registration.pdf
+2026_BIOL430G_mini-project.Rproj
+renv.lock                   # Package dependency lockfile
+```
 
-**Citation** 
+---
 
-If you find this work helpful, consider citing out paper. 
+## How to Run the Analysis
 
-Insert paper
+1. Open the project in RStudio using:
 
-**Acknowledgements**
-=======
-© 2026 Sofia Knopf. This resource was created for academic purposes as part of a university course. 
-All third-party materials are used for educational use only.
+   ```
+   2026_BIOL430G_mini-project.Rproj
+   ```
 
-#Experiencing music emotions through movement
+2. Restore the project environment:
 
-Code and data for our *neuroscience and musicology* paper:
+   ```r
+   renv::restore()
+   ```
 
-**"Evaluating the motor cortex’s role in generating emotion by comparing cortical 
-inhibition using Transcranial Magnetic Stimulation (TMS) to a sham control session"**
+3. Navigate to:
 
-By [Sofia Knopf](University of British Columbia Okanagan), [Sarah Kraeutner](https://thenimbl.com/) 
-(University of British Columbia Okanagan), and 
-[Anja Cui](https://ucrisportal.univie.ac.at/en/persons/anja-xiaoxing-cui/) (University of Vienna) 
+   ```
+   scripts/analysis/
+   ```
 
+4. Run scripts in order:
 
-All experimental results can be reproduced using the code and data in this repository. However, no raw data has been provided as it contains sensitive human data. 
-Feel free to contact Sarah Kraeutner (corresponding author) by [sarah.kraeutner@ubc.ca] 
-if you have any questions about our work. 
+   * Data preparation (if applicable)
+   * Main analysis script
+   * Figure generation scripts
 
-**Abstract**
+All analyses were conducted in R using statistical modeling and visualization tools.
 
-Music has the power to move us both physically and emotionally. 
-Research suggests a correlation between primary motor cortex (M1) activity and emotional production. 
-However, the causal relationship between M1 involvement and emotional processing has not yet been established using continuous theta-burst stimulation (cTBS). 
-To address this gap, the present within-subjects study will examine the effects on emotional responses to music following M1 inhibition. 
-Participants (N = 20, right-handed) will attend two laboratory sessions involving either active, or sham stimulation serving as a control. 
-cTBS will be applied to the contralateral M1 to modulate motor pathway activity. Following stimulation, participants will listen to pre-rated instrumental music clips 
-balanced for valence and arousal and will rate their emotional responses using standardized valence and arousal scales. 
-These findings may advance applications in well-being and neurorehabilitation, where music is used to enhance emotional health and restore motor function after neurological injury.
+---
 
-**Directory**
+## Data Sources
 
-* `data/` contains all the data used in this project. However, only processed de-identified data was incdluded as public sharing of raw data is against ethics. This subdirectory contains a data dictionary. 
-* `scripts/` contains source code for the within-participant valence and arousal ratings across active and sham TMS sessions. This contains files to generate the models and plots in the paper.
+* Data were collected from human participants using TMS and EMG recordings.
+* Only **processed, de-identified data** are included in this repository.
+* Raw data files are not publicly available due to ethical and privacy restrictions.
 
-**Requirments** 
+For access inquiries:
+Sarah Kraeutner — [sarah.kraeutner@ubc.ca](mailto:sarah.kraeutner@ubc.ca)
 
-* R version 4.4.2
-* openxlsx 
+---
 
-**Citation** 
+## Environment Setup
 
-If you find this work helpful, consider citing out paper. 
+This project uses the **renv** package for reproducibility.
 
-Insert paper
+To restore the environment:
 
-**Acknowledgements**
->>>>>>> 26e204a462f1a9d1ab7d9b07d54214d21203a78c
-We thank our colleague Celine Balay (University of British Columbia Okanagan) for their helpful discussions. 
+```r
+install.packages("renv")
+renv::restore()
+```
+
+**Key dependencies include:**
+
+* R (version 4.4.2)
+* openxlsx
+* (optional) lme4
+* (optional) ggplot2
+
+---
+
+## License
+
+This repository is intended for academic and educational use.
+
+* Raw data: Restricted due to ethical considerations
+
+---
+
+## Citation
+
+If you use this repository, please cite:
+
+Knopf, S. (2026). *Experiencing Music Emotions Through Movement*.
+Open Science Framework. https://doi.org/10.17605/OSF.IO/QBJKX
+
+---
+
+## Acknowledgements
+
+We thank Celine Balay (University of British Columbia Okanagan) for helpful discussions and support.
