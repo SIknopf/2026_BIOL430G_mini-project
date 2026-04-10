@@ -1,0 +1,161 @@
+---
+title: "2026-04-09_data-dictionary"
+output: pdf_document
+date: "2026-04-10"
+---
+
+## Data Dictionary
+
+### Dataset Name
+
+`music_task_data`
+
+This dataset contains participant-level and aggregated measures of emotional responses to music stimuli following active and sham transcranial magnetic stimulation (TMS).
+
+---
+
+## Variable Descriptions
+
+### Participant & Design Variables
+
+* **participant** *(character)*
+  Unique participant identifier (e.g., P01, P02)
+
+* **daysBetween** *(numeric)*
+  Number of days between experimental sessions
+
+* **condition** *(factor: Active, Sham)*
+
+  * **Active**: Continuous theta-burst stimulation (cTBS) delivered at 80% resting motor threshold
+  * **Sham**: Control stimulation delivered at 20% resting motor threshold
+
+---
+
+### Stimulus Variables
+
+* **stimuliType** *(factor)*
+  Category of music stimulus based on pre-rated emotional dimensions:
+
+  * High Valence – High Arousal
+  * High Valence – Low Arousal
+  * Low Valence – High Arousal
+  * Low Valence – Low Arousal
+
+* **stimSet** *(character)*
+  Identifier for the stimulus set used (e.g., Set1)
+
+---
+
+### Emotional Rating Variables
+
+* **meanValenceRating** *(numeric; range: 1–9)*
+  Average perceived valence (emotional positivity/negativity)
+
+* **meanArousalRating** *(numeric; range: 1–9)*
+  Average perceived arousal (emotional intensity/energy)
+
+**Scale interpretation (1–9):**
+
+* 1 = Low valence (negative) / low arousal (low energy)
+* 9 = High valence (positive) / high arousal (high energy)
+
+---
+
+### Reaction Time Variables
+
+* **meanValenceRT** *(numeric; seconds)*
+  Mean response time for valence ratings
+
+* **meanArousalRT** *(numeric; seconds)*
+  Mean response time for arousal ratings
+
+---
+
+### Standardized Variables
+
+* **meanZValenceRating** *(numeric)*
+  Z-scored valence ratings within participant
+
+* **meanZArousalRating** *(numeric)*
+  Z-scored arousal ratings within participant
+
+---
+
+### Trial-Level Information
+
+* **Ntrial** *(numeric)*
+  Number of trials contributing to each aggregated observation
+
+---
+
+### Individual Difference Measures
+
+* **KVIQ_Visual_Score** *(numeric)*
+  Visual imagery vividness score
+
+* **KVIQ_Kinesthetic_Score** *(numeric)*
+  Kinesthetic imagery vividness score
+
+---
+
+### Musical Sophistication (Gold-MSI)
+
+* **GoldMSI_ActiveEngagement_63** *(numeric)*
+  Engagement with musical activities
+
+* **GoldMSI_PerceptualAbilities_63** *(numeric)*
+  Ability to perceive and discriminate musical features
+
+* **GoldMSI_MusicalTraining_49** *(numeric)*
+  Formal musical training history
+
+* **GoldMSI_Emotions_42** *(numeric)*
+  Emotional engagement with music
+
+* **GoldMSI_SingingAbilities_49** *(numeric)*
+  Self-reported singing ability
+
+* **GoldMSI_GeneralMusicalSophistication_126** *(numeric)*
+  Overall musical sophistication composite score
+
+---
+
+## Measurement Units
+
+* Emotional ratings: 1–9 Likert scale
+* Reaction times: seconds
+* Questionnaire scores: scale-specific numeric totals
+
+---
+
+## Data Types
+
+* Numeric variables: ratings, reaction times, questionnaire scores
+* Character/factor variables: participant ID, condition, stimuliType, stimSet
+
+---
+
+## Allowed Values
+
+* Emotional ratings: integers from **1 to 9**
+* Condition: **Active**, **Sham**
+* Stimulus type: four predefined categories listed above
+
+---
+
+## Missing Values
+
+* Missing data are coded as:
+
+  ```
+  NA
+  ```
+
+---
+
+## Notes
+
+* Only **processed, de-identified data** are included in this repository
+* Raw EMG data are excluded due to ethical and privacy restrictions
+* Z-scored variables were computed within participants to standardize individual response tendencies
+* Aggregated variables (means) reflect trial-level averaging across stimulus categories and conditions
