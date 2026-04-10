@@ -1,0 +1,969 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Music Motor Manuscript},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Music Motor Manuscript}
+\author{}
+\date{\vspace{-2.5em}2026-03-12}
+
+\begin{document}
+\maketitle
+
+\subsection{Abstract}\label{abstract}
+
+Prior research suggests that music-evoked emotions may drive movement,
+thereby reinforcing emotional experience through engagement of the motor
+system. This relationship has been linked to activity in the primary
+motor cortex (M1); however, its causal role remains unclear. The present
+within-subjects study examined whether inhibiting M1 using continuous
+theta-burst stimulation alters perceived valence and arousal ratings of
+music. Contrary to our hypothesis, no significant effects of M1
+inhibition on valence or arousal ratings were observed relative to sham
+stimulation. Exploratory analyses examining musical sophistication, as
+measured by the Goldsmith Musical Sophistication Index (Gold-MSI),
+revealed that arousal ratings were significantly associated with the
+Active Engagement and Emotional Engagement subscales. In contrast, no
+significant relationships were observed between Gold-MSI scores and
+valence ratings. Gold-MSI scores did not moderate the effects of
+stimulation condition. These findings suggest that M1 may not play a
+direct causal role in emotional responses to music, highlighting the
+need to investigate other motor-related regions.
+
+Keywords: primary motor cortex (M1); continuous theta-burst stimulation
+(cTBS); valence; arousal; music.
+
+\begin{verbatim}
+\end{verbatim}
+
+\subsection{Introduction}\label{introduction}
+
+Emotion and movement are tightly interconnected, as physical action is
+not only an expression of emotion but also a contributor to its
+production (Shafir et al., 2013). This idea is rooted in the
+James--Lange theory, which proposes that emotions arise as a response to
+bodily changes (e.g., fear emerges from physiological reactions such as
+trembling and increased heart rate). Damasio's somatic marker hypothesis
+further extends this framework by suggesting that the brain stores
+bodily states as memories and links them to emotional experiences. As a
+result, when individuals perform, observe, or imagine a movement, the
+brain reactivates these bodily states to generate emotion in the current
+context. Consistent with these theories, Shafir et al.~(2013)
+demonstrated that executing, observing, and imagining body movements
+associated with specific emotions (e.g., happiness, sadness, fear)
+increased the corresponding affective state. The cross-modal bias theory
+further extends these frameworks by proposing that emotional information
+from one sensory modality, such as music, influences how emotions are
+experienced in another modality, such as body movement (Christensen et
+al., 2014). Christensen et al.~(2014) demonstrated that emotional
+experience can be characterized along two dimensions: valence, which
+refers to how positive or negative an emotion is, and arousal, which
+refers to the level of energy. Their results showed that subjective
+emotional ratings were primarily driven by valence; ergo, music
+influenced whether dance movements were perceived as more positive or
+negative. In contrast, physiological responses were modulated by arousal
+congruency, with the strongest bodily responses occurring when
+low-arousal movements were paired with sad music and high-arousal
+movements were paired with happy music. Yet, despite growing evidence of
+an association between movement and emotion, only recently has research
+begun to employ noninvasive neurophysiological techniques to investigate
+this correlation. Doruk et al.~(2016) helped address this gap in the
+literature by providing evidence that specific neurophysiological
+markers of the motor system are associated with post-stroke emotional
+disturbances, such as anxiety and depression. Using
+electroencephalography (EEG) and transcranial magnetic stimulation
+(TMS), the study demonstrated that emotional disturbance was not solely
+attributable to limbic dysfunction, but also reflected altered motor
+system dynamics. EEG revealed reduced interhemispheric coherence and
+frontal--central connectivity, while TMS indicated increased
+intracortical facilitation and higher motor thresholds in the unlesioned
+hemisphere. These neurophysiological markers were not associated with
+motor impairment severity; however, they were associated with mood and
+emotional control. Collectively, these findings indicate that motor and
+emotional disturbances following stroke are supported by distinct yet
+interacting neural mechanisms, rather than emotional disturbance being a
+direct consequence of motor impairment. Selosse et al.~(2025) sought to
+further evaluate the relationship between movement and emotion by
+isolating components of the motor system, specifically examining the
+relationship between the primary motor cortex (M1) and emotion. The
+researchers used functional magnetic resonance imaging (fMRI) to examine
+emotional prosody production while participants produced pseudowords in
+angry, happy, and neutral tones under three conditions: normal speech,
+whispering, and silent articulation. The authors found greater M1
+activation during normally voiced emotional speech compared to
+whispering or silent articulation. This pattern suggests that emotional
+prosody relies on a broader neural network that includes motor regions,
+with M1 supporting the execution of the vocal movements required to
+express emotion. Thus, emotional voice production can be understood as
+an embodied process in which M1 contributes to the physical expression
+of emotion through vocal tract movement and speech. Xia et al.~(2021)
+further examined the relationship between the M1 and emotion by
+distinguishing the associations between emotional processing and
+activity in the left and right M1. The study employed TMS to record
+motor-evoked potentials (MEPs) from both the left and right M1 while
+right-handed participants were instructed to move a manikin toward
+positively valenced images and away from negatively valenced images
+using keyboard presses. The results showed that the left M1 exhibited
+larger MEP amplitudes, indicating increased excitability, when
+participants performed compatible behaviors (i.e., approaching positive
+stimuli and avoiding negative stimuli). In contrast, the right M1 showed
+reduced excitability during these compatible behaviors. These effects
+emerged prior to physical movement; therefore, during stimulus
+processing. Together, these findings suggest that emotional valence
+modulates motor preparation, supporting a functional association between
+emotion processing and contralateral M1 activity. Despite growing
+evidence linking M1 activity to emotional processing, most research has
+established only correlational relationships. Establishing causality
+requires noninvasive neuromodulation techniques, such as continuous
+theta-burst stimulation (cTBS), which can inhibit cortical regions to
+assess their functional contributions. Prior work has demonstrated that
+cTBS applied to M1 can be used to test for causal involvement by
+examining behavioral consequences following inhibition (e.g., Kraeutner
+et al., 2017). However, little research has directly investigated
+whether inhibiting M1 alters self-reported emotions, leaving the causal
+role of M1 in emotion largely unresolved. Hence, the present study aims
+to address this gap by using cTBS to inhibit the contralateral M1 and
+examining its effects on emotion production in response to pre-rated
+music clips varying in valence and arousal. In a within-subjects design,
+right-handed participants completed two sessions: active cTBS
+(experimental) and sham (control). After stimulation, participants
+listened to instrumental music clips and rated each clip's valence and
+arousal. Participant musical sophistication was also measured using a
+questionnaire. We hypothesize that M1 inhibition will yield more neutral
+valence and arousal ratings than sham, reflecting reduced M1 involvement
+in emotion processing. Additionally, if participants possess greater
+musical sophistication, they may show more polarized ratings under M1
+inhibition than those with lower musical sophistication, suggesting
+alternative emotion-processing mechanisms less dependent on M1.
+
+\begin{verbatim}
+\end{verbatim}
+
+\subsection{Methods}\label{methods}
+
+\textbf{Participants}
+
+Study participants (N = 29) were recruited through the SONA online
+platform and poster advertisement. Eligibility was restricted to
+right-handed individuals who were able to understand English and had
+normal or corrected-to-normal vision. Participants were excluded if they
+self-reported any neurological conditions or impairments that would
+affect motor function, or if they had any contraindications to TMS as
+identified by a standard screening form (Rossi et al., 2009). For the
+final analysis, N = 22 university students were included, and 14
+identified as female. Participants had a mean age of 22.73 years (SD =
+4.7, range = 19--38) and a mean General Musical Sophistication score of
+74.68 (SD = 16.45, range = 35--114). Each participant received either
+\$10 CAD per session or SONA course credit (2 credits for Session 1 and
+1.5 credits for Session 2). Data collection took place between July 15,
+2025, and February 26, 2026.
+
+\textbf{Materials}
+
+\textbf{Transcranial Magnetic Stimulation (TMS) Screening Form}
+
+To ensure participant eligibility and safety during transcranial
+magnetic stimulation (TMS), the TMS Screening Form was administered
+(Rossi et al., 2009). The questionnaire includes 10 binary items
+(yes/no) assessing medical history; a ``yes'' response to any item
+results in exclusion. Participants were also required to report current
+medications, the presence of metal in the body, and any prior experience
+with TMS or magnetic resonance imaging (MRI). Any medications, implanted
+metal, or history indicating a contraindication or adverse response to
+TMS or MRI led to exclusion.
+
+\textbf{Kinaesthetic and Visual Imagery Questionnaire (KVIQ)}
+
+The Kinaesthetic and Visual Imagery Questionnaire (KVIQ) was used to
+assess participants' ability to perform kinaesthetic and visual motor
+imagery (Malouin et al., 2007). Participants physically performed five
+body movements and then imagined each movement using visual imagery,
+followed by kinaesthetic imagery. Participants rated the clarity and
+intensity of the imagined movement on a 5-point scale, with 1 indicating
+the weakest imagery and 5 indicating the strongest.
+
+\textbf{Goldsmith Musical Sophistication Index (Gold-MSI)}
+
+To assess musical sophistication, participants completed the Goldsmiths
+Musical Sophistication Index (Gold-MSI; Müllensiefen et al., 2014). This
+questionnaire evaluates six dimensions: active engagement, perceptual
+ability, musical training, emotional engagement, singing ability, and
+general musical sophistication. Participants responded to items using a
+7-point Likert scale, with 1 indicating strong disagreement and 7
+indicating strong agreement. The questionnaire was also used to collect
+descriptive information, including participants' age, sex, and education
+level.
+
+\textbf{Transcranial Magnetic Stimulation (TMS)}
+
+Participants underwent transcranial magnetic stimulation (TMS)-- a
+non-invasive technique that uses brief magnetic pulses to generate
+electrical currents in the brain and will be used in accordance with
+well-established procedures (Rossi et al.~2009; Huang et al.~2005;
+Wischnewski et al.~2015). Stimulation output intensity has been
+individualized using established protocols (Kleim et al., 2007; Rossi et
+al., 2009). Neuronavigation (Brainsight 2™; Rogue Research Inc.)
+provided focal, real-time localization of the TMS coil with millimetric
+accuracy by optically tracking coil position relative to digitized
+anatomical landmarks co-registered to a template brain. This system
+enabled precise targeting of cortical regions. To determine stimulation
+intensity and the motor ``hotspot,'' resting motor threshold (RMT) was
+assessed as an index of cortical excitability. RMT is defined as the
+minimum stimulator output that elicits visible muscle twitches and
+motor-evoked potentials ≥50 μV. This was recorded using surface
+electromyography (EMG) over the left first dorsal interosseous (FDI) in
+at least 5 of 10 trials. Baseline motor excitability was assessed by
+recording 16 motor evoked potentials (MEPs) at rest, 16 during
+kinaesthetic motor imagery (KMI), and 16 during visual motor imagery
+(VMI) of a simple finger abduction. TMS was delivered at 120\% of
+resting motor threshold (RMT) (Bruton et al., 2020; Stinear et al.,
+2007; Wright et al., 2014). Participants received continuous theta-burst
+stimulation (cTBS) over the contralateral M1 in accordance with
+established guidelines (Huang et al., 2005; Rossi et al., 2009, 2020;
+Wischnewski et al., 2015). The cTBS protocol consisted of bursts of
+three pulses at 50 Hz, repeated every 200 ms for 40 s (600 pulses) at
+80\% RMT, delivered using a Magstim SuperRapid2 Plus-1 with a cooled
+figure-of-eight coil. Sham cTBS was delivered to the vertex at 20\% RMT
+for an equivalent duration using a validated protocol that mimics the
+sensory experience of TMS without producing physiological effects
+(Kraeutner et al., 2016, 2017). All stimulation parameters were within
+established safety standards. Following cTBS or sham stimulation, MEPs
+were recorded under the same conditions to confirm M1 inhibition.
+
+\textbf{Active Listening Task}
+
+Participants' emotion production was assessed by completing an active
+listening task, which followed previously reported procedures (Eerola \&
+Vuoskoski, 2011). Participants were randomly assigned to listen to one
+of two sets of 32 pre-rated instrumental music clips, with clip order
+randomized across sessions and participants. The clips were balanced for
+valence and arousal and were selected from an established set of 110
+clips (openly available at \url{https://osf.io/p6vkg/wiki/home/}).
+During the task, participants were seated in a chair with their dominant
+hand resting on their lap and their non-dominant hand placed on a
+keypad. They listened to the clips through headphones and, after each
+clip, used the keypad to rate their emotional responses on 9-point
+valence and arousal scales. Procedure Participants were informed that
+participation was voluntary and that they could withdraw from the study
+at any time without penalty or loss of compensation. All participants
+completed a TMS safety screening form to confirm eligibility and
+provided written informed consent before participation. See Figure 1 for
+a schematic overview of the study procedure. The study consisted of two
+sessions separated by a minimum of 24 hours. In Session 1, participants
+completed the KVIQ, the Motor Experience Questionnaire, and the
+Gold-MSI. Participants were then seated comfortably, and surface EMG
+electrodes were placed on the left FDI to record muscle activity. Using
+neuronavigation, the contralateral M1 was localized, and RMT was
+determined. Participants subsequently received 16 single-pulse TMS
+stimulations at rest, 16 during KMI, and 16 during VMI. The motor
+imagery task consisted of imagining abduction of the left index finger.
+Imagery trials were cued using the software PsychoPy; participants were
+instructed to close their eyes and begin imagining upon hearing the
+auditory cue ``Go'' and to stop imagining upon hearing ``Rest.'' Each
+imagery period lasted 10 seconds, during which two TMS pulses were
+delivered. Participants were permitted to rest between trials and
+initiated each subsequent trial by pressing a keyboard key. Following
+baseline stimulation, participants received either active or sham cTBS.
+Earplugs were provided to minimize auditory discomfort. All participants
+received both active and sham cTBS across two sessions, with the order
+randomized. Participants were informed that they would receive both
+conditions, but were blinded to the condition administered in each
+session. After cTBS, participants were instructed to refrain from moving
+their left hand for 40 minutes. A 10-minute rest period followed cTBS,
+after which participants again received 16 TMS pulses at rest, 16 during
+KMI, and 16 during VMI. The order of KMI and VMI conditions was
+counterbalanced across sessions. Participants then completed an active
+listening task. Using a PsychoPy program, participants listened to 32
+instrumental music clips through headphones. After each clip, they rated
+perceived valence and arousal on a 9-point scale using keyboard
+responses. The order of valence and arousal ratings was counterbalanced
+across sessions. All post-cTBS tasks were completed within 40 minutes,
+and no data were collected beyond this period. At the conclusion of each
+session, participants received compensation in the form of cash or SONA
+research credit. See Figure 1 for a visual of the study methodology.
+
+\textbf{Statistical analyses}
+
+All statistical analyses were conducted using RStudio. Participants were
+randomly assigned to receive cTBS in session 1 or session 2. The order
+of motor imagery task performance---KMI and VMI---as well as the rating
+of valence and arousal, was counterbalanced across sessions. Each
+participant contributed eight observations per session, corresponding to
+ratings of the four pre-defined categories of valence and arousal: high
+valence--low arousal, low valence--high arousal, high valence--high
+arousal, and low valence--low arousal. Participants provided ratings in
+both the sham control and active cTBS conditions. Univariate analysis of
+variance (ANOVA) were conducted to assess the effects of active versus
+sham cTBS on valence and arousal ratings across the four clip
+categories. Linear mixed-effects models (LMEs) were conducted to examine
+whether Gold-MSI ratings mediated the relationship between M1 inhibition
+and perceived valence and arousal ratings. Music clips were selected
+from a validated set of 110 clips. Four categories were created: 16
+clips with the largest difference between high valence and low arousal,
+16 clips with the largest difference between low valence and high
+arousal, 16 clips with the highest valence and arousal, and 16 clips
+with the lowest valence and arousal. These four groups were then
+randomly divided into two sets of eight clips per category, yielding two
+sets of 32 music clips. Participants were randomly assigned to listen to
+one of the two sets. The presentation order of the clips was randomized
+within each participant's session and across participants.
+
+\begin{verbatim}
+\end{verbatim}
+
+\subsection{Results}\label{results}
+
+Following the criteria above, seven participants were excluded due to
+inability to establish a reliable motor threshold (n = 4), issues during
+the session (n = 1), use of medication contraindicated for TMS (n = 1),
+and participant failure to attend the session (n = 1). Hence, data from
+22 participants were included in the final analysis.
+
+\textbf{Active Listening Task}
+
+To test the hypothesis that inhibition of M1 would neutralize perceived
+valence and arousal ratings, two separate univariate analyses of
+variance (ANOVAs) were conducted. For both mean valence and mean arousal
+ratings, there was no significant main effect of stimulation condition
+(see Figures 2 \& 3). However, a significant main effect of stimulus
+type was observed for both valence (p \textless{} .001) and arousal (p
+\textless{} .001) using Greenhouse--Geisser corrections (see Figures 2
+\& 3). This indicates that ratings differed across the four stimulus
+categories. Effect size analyses further indicated that the stimulation
+condition had minimal influence on both valence and arousal ratings. For
+valence, Cohen's d values were small or negligible across stimulus
+categories: high valence--low arousal (d = 0.37), indicating a
+small-to-moderate effect with higher ratings in the active condition;
+low valence--low arousal (d = 0.23), indicating a small effect with
+higher ratings in the active condition; low valence--high arousal (d =
+−0.15), indicating a very small effect with lower ratings in the active
+condition; and high valence--high arousal (d = 0.01), indicating no
+meaningful effect. Similarly, for arousal ratings, effect sizes were
+small or negligible: high valence--low arousal (d = −0.23), indicating a
+small effect with lower ratings in the active condition; low
+valence--high arousal (d = 0.15), indicating a very small effect with
+higher ratings in the active condition; low valence--low arousal (d =
+0.07), indicating no meaningful effect; and high valence--high arousal
+(d = 0.02), also indicating no meaningful effect.
+
+\textbf{General Musical Sophistication}
+
+To examine whether musical sophistication was associated with perceived
+valence and arousal ratings across stimulus types, linear mixed-effects
+models (LMEs) were conducted, with participant included as a random
+intercept. Gold-MSI scores (Active Engagement, Perceptual Ability,
+Musical Training, Emotional Engagement, Singing Ability, and General
+Musical Sophistication) were entered as fixed effects, along with
+stimulus type. The model predicting mean valence ratings revealed no
+significant main effects of Gold-MSI scores on any subscale, indicating
+that individual differences in musical sophistication did not
+significantly predict mean valence ratings across stimulus categories.
+The model predicting mean arousal ratings revealed significant effects
+of the Gold-MSI subscales Active Engagement (p = .004) and Emotional
+Engagement (p = .005; see Figures 4 \& 5). In contrast, the remaining
+subscales (Perceptual Ability, Musical Training, Singing Ability, and
+General Musical Sophistication) were not significantly associated with
+mean arousal ratings. Additional LMEs examining both mean valence and
+arousal ratings across stimulus type and stimulation condition revealed
+no significant main effects involving Gold-MSI scores across the six
+subscales.
+
+\begin{verbatim}
+\end{verbatim}
+
+\subsection{Discussion}\label{discussion}
+
+We hypothesized that inhibition of M1 would lead to more neutral valence
+and arousal ratings compared to sham stimulation, reflecting a reduced
+role of M1 in emotion processing. Additionally, we predicted that
+individuals with greater musical sophistication would exhibit more
+polarized emotional ratings under M1 inhibition, suggesting reliance on
+alternative emotion-processing mechanisms. Contrary to these
+predictions, stimulation condition did not significantly influence
+either valence or arousal ratings, and effect size analyses indicated
+only minimal differences between active and sham conditions. Instead,
+emotional ratings were primarily driven by stimulus type, with clear
+differences observed across the four stimulus categories. Furthermore,
+musical sophistication did not moderate the effects of M1 inhibition on
+emotional ratings. Although exploratory analyses revealed that Active
+Engagement and Emotional Engagement were associated with higher arousal
+ratings, no such relationships were observed for valence. Together,
+these findings do not support a causal role of M1 in shaping emotional
+responses to music, nor do they indicate that musical sophistication
+alters this relationship. One possible explanation for the absence of M1
+effects is that the active listening task may not have strongly engaged
+motor-related processes (Lee \& Siegle, 2012). Prior research suggests
+that different types of emotional evaluations recruit distinct neural
+networks. For example, stimulus-focused evaluations, such as rating the
+emotional content of a stimulus, primarily engage sensory processing
+regions and prefrontal areas involved in evaluation, including the
+ventrolateral prefrontal cortex. In contrast, evaluating one's own
+emotional state recruits regions such as the insula and anterior
+cingulate cortex, while evaluating others' emotions engages
+social-cognitive regions such as the superior temporal sulcus and
+temporoparietal junction. Since participants in the present study rated
+the perceived valence and arousal of musical stimuli, their responses
+may have relied more on perceptual and evaluative networks than on motor
+system involvement. This may help explain why inhibiting M1 did not
+significantly alter emotional ratings. The lack of M1 involvement in the
+present study may also be explained by the task's limited social and
+interactive context (Antonelli et al., 2025). Inter-neural synchrony
+(INS), which reflects coordinated brain activity across individuals, may
+emerge most strongly during real-time, reciprocal social interactions
+where individuals continuously exchange emotional and behavioral cues.
+In contrast, when participants engage with non-social or
+computer-mediated stimuli, such as rating music on a device, the
+interaction lacks the dynamic feedback loop necessary to support strong
+interpersonal coupling. This, in turn, may reduce INS. Since motor
+regions such as M1 are often implicated in action coordination and
+interpersonal synchrony, reduced INS in a non-interactive setting may
+limit recruitment of these regions. Consequently, the absence of a
+meaningful social context in this study may have attenuated M1
+involvement; thereby, inhibitory stimulation did not significantly alter
+participants' emotional ratings of the music. Another possible
+explanation for why inhibiting the M1 did not alter participants'
+valence or arousal ratings of music clips is that M1 may not be central
+in generating affective evaluations of music (Putkinen et al., 2021).
+Although the motor cortex contains emotion-specific activity patterns
+and supports embodied aspects of music perception (e.g., movement),
+fundamental affective dimensions such as valence and arousal are
+primarily mediated by auditory cortical processing and by broader limbic
+and paralimbic systems. As a result, any potential influence of musical
+sophistication on M1-related emotional processing may not be detectable
+because there are no observable differences in valence or arousal
+experiences relative to sham. Although exploratory analyses showed that
+Active Engagement and Emotional Engagement were associated with higher
+arousal ratings, no such relationships were observed for valence. One
+possible explanation is that participants who are more emotionally and
+actively engaged with music may experience stronger empathic or embodied
+responses during the active listening task (Chapin et al., 2010). Music
+may evoke emotion by prompting participants to internally simulate the
+tempo and its expression, making the experience feel more intense.
+Individuals who frequently engage with music or are more emotionally
+attuned may be more sensitive to these expressive cues, leading to
+heightened arousal. In contrast, valence appears to be more subjective
+and less consistently tied to these embodied processes, which may
+explain why Active and Emotional Engagement did not influence whether
+emotions were perceived as positive or negative. Future research should
+move beyond numerical valence and arousal scales, as they are limited in
+their ability to represent emotion and can be interpreted differently by
+participants, introducing variability in the data. Future studies could
+include discrete emotion categories such as happiness, sadness, fear,
+anger, and tenderness, alongside dimensional measures, to better capture
+the specific emotional aspects of music (Eerola \& Vuoskoski, 2011).
+Additionally, distinguishing among types of arousal, such as energy and
+tension arousal, may provide more detail about how emotions are
+experienced. Including measures such as preference and perceived beauty
+would also help separate emotional valence from aesthetic liking. Since
+prior research suggests that dimensional and discrete models capture
+different aspects of emotion and may rely on different processes,
+combining these approaches could provide a more accurate and nuanced
+understanding of emotional responses to music.
+
+\textbf{Limitations}
+
+Several limitations should be noted. First, the sample size may have
+been too small to detect subtle effects. We also did not recruit
+participants across the full range of musical sophistication, which
+likely reduced variability and made it harder to observe any moderating
+effects. Using only Western music clips may limit emotional responses
+and reduce the generalizability of the findings across cultures. In
+addition, the laboratory setting was highly controlled and may not
+reflect real-world musical experiences. Our sample consisted mainly of
+university students in their early twenties, which limits
+generalizability to other age groups. We did not analyze Brainsight data
+to confirm accurate targeting of M1. We also did not verify that
+cortical inhibition was maintained after the music listening task. These
+factors may have reduced our ability to detect meaningful effects.
+
+\textbf{Conclusion}
+
+In conclusion, our findings challenge prior research suggesting that M1
+plays a direct role in emotion production, as we observed no causal
+relationship. Emotional ratings were not influenced by musical
+sophistication under M1 inhibition. However, participants with higher
+Active and Emotional Engagement with music showed greater sensitivity to
+arousal. These results help clarify which neural systems are involved in
+emotional processing. This is important for guiding future research, as
+it suggests that targeting M1 alone may not be effective for influencing
+emotion. Instead, it highlights the need to focus on broader networks
+when developing interventions for motor rehabilitation and the treatment
+of affective disorders.
+
+\subsection{References}\label{references}
+
+Shafir, T., Taylor, S. F., Atkinson, A. P., Langenecker, S. A., \&
+Zubieta, J. K. (2013). Emotion~
+
+regulation through execution, observation, and imagery of emotional
+movements. Brain~
+
+and Cognition, 82(2), 219-227.
+\url{https://doi.org/10.1016/j.bandc.2013.03.001}
+
+Christensen, J. F., Gaigg, S. B., Gomila, A., Oke, P., \& Calvo-Merino,
+B. (2014). Enhancing~
+
+emotional experiences to dance through music: the role of valence and
+arousal in the~
+
+cross-modal bias. Frontiers In Human Neuroscience, 8, 757.~
+
+\url{https://doi.org/10.3389/fnhum.2014.00757}
+
+\subsection{Plots}\label{plots}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(here}\SpecialCharTok{::}\FunctionTok{here}\NormalTok{(}\StringTok{"data"}\NormalTok{, }\StringTok{"processed"}\NormalTok{, }\StringTok{"music\_task\_data\_participant{-}level.csv"}\NormalTok{))}
+
+\FunctionTok{library}\NormalTok{(here)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'here' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## here() starts at C:/Users/knopf/OneDrive/Documents/school_2025-2026/Biol430G/BIOL430G_mini-project
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ez)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ez' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'ggplot2' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lme4)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: Matrix
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'Matrix'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:tidyr':
+## 
+##     expand, pack, unpack
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(lmerTest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'lmerTest' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lmerTest'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:lme4':
+## 
+##     lmer
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:stats':
+## 
+##     step
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(effectsize)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'effectsize' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(renv)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'renv' was built under R version 4.4.3
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'renv'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:Matrix':
+## 
+##     update
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     embed, update
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:utils':
+## 
+##     history, upgrade
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     autoload, load, remove, use
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{renv}\SpecialCharTok{::}\FunctionTok{snapshot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## The following package(s) will be updated in the lockfile:
+## 
+## # CRAN -----------------------------------------------------------------------
+## - abind            [* -> 1.4-8]
+## - backports        [* -> 1.5.0]
+## - base64enc        [* -> 0.1-3]
+## - bayestestR       [* -> 0.17.0]
+## - boot             [* -> 1.3-31]
+## - broom            [* -> 1.0.7]
+## - bslib            [* -> 0.9.0]
+## - cachem           [* -> 1.1.0]
+## - car              [* -> 3.1-3]
+## - carData          [* -> 3.0-5]
+## - cli              [* -> 3.6.3]
+## - colorspace       [* -> 2.1-1]
+## - cowplot          [* -> 1.1.3]
+## - cpp11            [* -> 0.5.2]
+## - datawizard       [* -> 1.3.0]
+## - Deriv            [* -> 4.1.6]
+## - digest           [* -> 0.6.37]
+## - doBy             [* -> 4.6.25]
+## - dplyr            [* -> 1.1.4]
+## - effectsize       [* -> 1.0.2]
+## - evaluate         [* -> 1.0.3]
+## - ez               [* -> 4.5-0]
+## - fansi            [* -> 1.0.6]
+## - farver           [* -> 2.1.2]
+## - fastmap          [* -> 1.2.0]
+## - fontawesome      [* -> 0.5.3]
+## - Formula          [* -> 1.2-5]
+## - fs               [* -> 1.6.5]
+## - generics         [* -> 0.1.3]
+## - ggplot2          [* -> 3.5.2]
+## - glue             [* -> 1.8.0]
+## - gtable           [* -> 0.3.6]
+## - here             [* -> 1.0.2]
+## - highr            [* -> 0.11]
+## - htmltools        [* -> 0.5.8.1]
+## - insight          [* -> 1.4.6]
+## - isoband          [* -> 0.2.7]
+## - jquerylib        [* -> 0.1.4]
+## - jsonlite         [* -> 1.8.9]
+## - knitr            [* -> 1.49]
+## - labeling         [* -> 0.4.3]
+## - lattice          [* -> 0.22-6]
+## - lifecycle        [* -> 1.0.4]
+## - lme4             [* -> 1.1-36]
+## - lmerTest         [* -> 3.1-3]
+## - magrittr         [* -> 2.0.3]
+## - MASS             [* -> 7.3-65]
+## - Matrix           [* -> 1.7-1]
+## - MatrixModels     [* -> 0.5-3]
+## - memoise          [* -> 2.0.1]
+## - mgcv             [* -> 1.9-1]
+## - microbenchmark   [* -> 1.5.0]
+## - mime             [* -> 0.12]
+## - minqa            [* -> 1.2.8]
+## - modelr           [* -> 0.1.11]
+## - munsell          [* -> 0.5.1]
+## - nlme             [* -> 3.1-167]
+## - nloptr           [* -> 2.1.1]
+## - nnet             [* -> 7.3-19]
+## - numDeriv         [* -> 2016.8-1.1]
+## - parameters       [* -> 0.28.3]
+## - pbkrtest         [* -> 0.5.3]
+## - performance      [* -> 0.16.0]
+## - pillar           [* -> 1.10.1]
+## - pkgconfig        [* -> 2.0.3]
+## - plyr             [* -> 1.8.9]
+## - purrr            [* -> 1.0.4]
+## - quantreg         [* -> 6.00]
+## - R6               [* -> 2.6.1]
+## - rappdirs         [* -> 0.3.3]
+## - rbibutils        [* -> 2.3]
+## - RColorBrewer     [* -> 1.1-3]
+## - Rcpp             [* -> 1.0.14]
+## - RcppEigen        [* -> 0.3.4.0.2]
+## - Rdpack           [* -> 2.6.2]
+## - reformulas       [* -> 0.4.0]
+## - renv             [* -> 1.1.8]
+## - reshape2         [* -> 1.4.4]
+## - rlang            [* -> 1.1.5]
+## - rmarkdown        [* -> 2.30]
+## - rprojroot        [* -> 2.1.1]
+## - sass             [* -> 0.4.9]
+## - scales           [* -> 1.3.0]
+## - SparseM          [* -> 1.84-2]
+## - stringi          [* -> 1.8.4]
+## - stringr          [* -> 1.5.1]
+## - survival         [* -> 3.7-0]
+## - tibble           [* -> 3.2.1]
+## - tidyr            [* -> 1.3.1]
+## - tidyselect       [* -> 1.2.1]
+## - tinytex          [* -> 0.54]
+## - utf8             [* -> 1.2.4]
+## - vctrs            [* -> 0.6.5]
+## - viridisLite      [* -> 0.4.2]
+## - withr            [* -> 3.0.2]
+## - xfun             [* -> 0.50]
+## - yaml             [* -> 2.3.10]
+## 
+## The version of R recorded in the lockfile will be updated:
+## - R                [* -> 4.4.2]
+## 
+## - Lockfile written to "~/school_2025-2026/Biol430G/BIOL430G_mini-project/manuscript/docs/renv.lock".
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Figure 2}
+\CommentTok{\#Look at participant individual change between active and sham for meanValenceRating}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ condition, }\AttributeTok{y =}\NormalTok{ meanValenceRating, }\AttributeTok{group =}\NormalTok{ participant)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{stimuliType) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Individual Differences in Valence Ratings by Condition and Stimulus Type"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2026-03-12__manuscript_rmd_files/figure-latex/unnamed-chunk-3-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Figure 3}
+\CommentTok{\#Look at participant individual change between active and sham for meanArousalRating}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ condition, }\AttributeTok{y =}\NormalTok{ meanArousalRating, }\AttributeTok{group =}\NormalTok{ participant)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{stimuliType) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Individual Differences in Arousal Ratings by Condition and Stimulus Type"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2026-03-12__manuscript_rmd_files/figure-latex/unnamed-chunk-4-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Figure 4}
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ GoldMSI\_ActiveEngagement\_63,}
+                 \AttributeTok{y =}\NormalTok{ meanArousalRating,}
+                 \AttributeTok{color =}\NormalTok{ stimuliType)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"GoldMSI Active Engagement Predicting Arousal Ratings"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"GoldMSI Active Engagement"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Mean Arousal Rating"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Stimulus Type"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2026-03-12__manuscript_rmd_files/figure-latex/unnamed-chunk-5-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#Figure 5}
+\CommentTok{\#plot }
+\FunctionTok{ggplot}\NormalTok{(data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ GoldMSI\_Emotions\_42,}
+                 \AttributeTok{y =}\NormalTok{ meanArousalRating,}
+                 \AttributeTok{color =}\NormalTok{ stimuliType)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.45}\NormalTok{, }\AttributeTok{size =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_smooth}\NormalTok{(}\AttributeTok{method =} \StringTok{"lm"}\NormalTok{, }\AttributeTok{se =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Emotions and Arousal Ratings"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"GoldMSI Emotional Engagement"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Mean Arousal Rating"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Stimulus Type"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{13}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\pandocbounded{\includegraphics[keepaspectratio]{2026-03-12__manuscript_rmd_files/figure-latex/unnamed-chunk-6-1.pdf}}
+
+Note that the \texttt{echo\ =\ FALSE} parameter was added to the code
+chunk to prevent printing of the R code that generated the plot.
+
+\end{document}
