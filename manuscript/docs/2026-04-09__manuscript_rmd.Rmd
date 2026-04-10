@@ -338,4 +338,3 @@ ggplot(data, aes(x = GoldMSI_Emotions_42,
   theme_minimal(base_size = 13)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
