@@ -19,11 +19,6 @@ library(ggplot2)
 # 2. Load the dataset
 ##############################
 
-# IMPORTANT:
-# This file path only works on your computer.
-# If you want others to run this project, use a relative path instead
-# (example shown below).
-
 data <- read.csv("data/processed/music_task_data_participant-level.csv")
 
 
